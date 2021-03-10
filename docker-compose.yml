@@ -1,0 +1,21 @@
+version: "3"
+services:
+  # poetry-system:
+  #   build: ../poetry-system
+  #   ports:
+  #   - "8080:8080"
+  #   depends_on:
+  #   - mongo
+  #   environment:
+  #     - MONGO_DB_URL=mongodb://mongo:27017/poetry
+  #     - ENV=DEVELOPMENT
+  poetry-contracts:
+    build: ../poetry-contracts
+    ports:
+      - "8080:8080"
+  #   depends_on:
+  #     - poetry-system
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #   - "27017:27017"
