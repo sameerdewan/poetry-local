@@ -12,9 +12,10 @@ services:
   poetry-contracts:
     build: ../poetry-contracts
     ports:
-      - "8080:8080"
-  #   depends_on:
-  #     - poetry-system
+      - "8545:8545"
+# networks:
+#   ex:
+#     driver: bridge    
   # mongo:
   #   image: mongo
   #   ports:
