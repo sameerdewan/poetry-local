@@ -16,6 +16,7 @@ services:
     environment:
       - MONGO_DB_URL=mongodb://mongo:27017/poetry
       - ENV=DEVELOPMENT
+      - PORT=8080
     volumes:
     - ./appdata:/appdata
     networks:
