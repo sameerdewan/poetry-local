@@ -13,6 +13,8 @@ services:
     build: ../poetry-contracts
     ports:
       - "8545:8545"
+    volumes:
+    - ./appdata:/appdata
 # networks:
 #   ex:
 #     driver: bridge    
