@@ -31,7 +31,6 @@ services:
     environment:
       - MATIC_URL=https://gasstation-mainnet.matic.network
       - ETHEREUM_USD_URL=https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=0
-      - PROVIDER=http://localhost:8545
       - MONGO_DB_URL=mongodb://mongo:27017/poetry
       - ENV=DEVELOPMENT
     volumes:
@@ -50,6 +49,7 @@ services:
     environment:
       - MONGO_DB_URL=mongodb://mongo:27017/poetry
       - ENV=DEVELOPMENT
+      - PROVIDER=http://localhost:8545
     volumes:
       - ./appdata:/appdata
     networks:
