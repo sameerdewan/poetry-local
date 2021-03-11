@@ -4,6 +4,11 @@ services:
     build: ../poetry-contracts
     ports:
       - "8545:8545"
+    environment:
+      - MNEMONIC=squirrel\ march\ broom\ strong\ kick\ blast\ unique\ team\ song\ song\ assist\ million
+      - INFURAKEY=https://rinkeby.infura.io/v3/df4de1f306044440bf0e4843d8ff667b
+      - NETWORK=development
+      - ENV=DEVELOPMENT
     volumes:
     - ./appdata:/appdata
   poetry-system:
