@@ -41,7 +41,6 @@ services:
       - payments
     links:
       - mongo
-      - poetry-api
   poetry-api:
     build: ../poetry-api
     ports: 
