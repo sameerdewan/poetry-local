@@ -16,7 +16,6 @@ services:
     environment:
       - MONGO_DB_URL=mongodb://mongo:27017/poetry
       - ENV=DEVELOPMENT
-      - PORT=8080
     volumes:
     - ./appdata:/appdata
     networks:
@@ -31,9 +30,10 @@ services:
       - mongo
     environment:
       - MATIC_URL=https://gasstation-mainnet.matic.network
-      - ETHEREUM_URL=https://data-api.defipulse.com/api/v1/egs/api/ethgasAPI.json?api-key=6d52d76f9864c854c36d043d987ba171c5a86ff7205cd12ff8509a7be07b
       - ETHEREUM_USD_URL=https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=0
       - PROVIDER=http://localhost:8545
+      - MONGO_DB_URL=mongodb://mongo:27017/poetry
+      - ENV=DEVELOPMENT
     volumes:
       - ./appdata:/appdata
     networks:
@@ -41,6 +41,24 @@ services:
       - payments
     links:
       - mongo
+      - poetry-api
+  poetry-api:
+    build: ../poetry-api
+    ports: 
+      - "4000:4000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_DB_URL=mongodb://mongo:27017/poetry
+      - ENV=DEVELOPMENT
+    volumes:
+      - ./appdata:/appdata
+    networks:
+      - database
+      - payments
+    links:
+      - mongo
+      - poetry-payments
   mongo:
     image: mongo
     ports:
