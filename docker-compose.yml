@@ -22,7 +22,25 @@ services:
     networks:
       - database
     links:
-      - mongo  
+      - mongo
+  poetry-payments:
+    build: ../poetry-payments
+    ports: 
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - MATIC_URL=https://gasstation-mainnet.matic.network
+      - ETHEREUM_URL=https://data-api.defipulse.com/api/v1/egs/api/ethgasAPI.json?api-key=6d52d76f9864c854c36d043d987ba171c5a86ff7205cd12ff8509a7be07b
+      - ETHEREUM_USD_URL=https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=0
+      - PROVIDER=http://localhost:8545
+    volumes:
+      - ./appdata:/appdata
+    networks:
+      - database
+      - payments
+    links:
+      - mongo
   mongo:
     image: mongo
     ports:
@@ -32,3 +50,6 @@ services:
 networks:
   database:
     driver: bridge
+  payments:
+    driver: bridge
+  
