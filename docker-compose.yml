@@ -5,12 +5,14 @@ services:
     ports:
       - "8545:8545"
     environment:
-      - MNEMONIC=squirrel\ march\ broom\ strong\ kick\ blast\ unique\ team\ song\ song\ assist\ million
+      - MNEMONIC=squirrel march broom strong kick blast unique team song song assist million
       - INFURAKEY=https://rinkeby.infura.io/v3/df4de1f306044440bf0e4843d8ff667b
       - NETWORK=development
       - ENV=DEVELOPMENT
     volumes:
     - ./appdata:/appdata
+    networks:
+      - blockchain
   poetry-system:
     build: ../poetry-system
     ports:
@@ -25,8 +27,6 @@ services:
     - ./appdata:/appdata
     networks:
       - database
-    links:
-      - mongo
   poetry-payments:
     build: ../poetry-payments
     ports: 
@@ -43,8 +43,6 @@ services:
     networks:
       - database
       - payments
-    links:
-      - mongo
   poetry-api:
     build: ../poetry-api
     ports: 
@@ -54,15 +52,14 @@ services:
     environment:
       - MONGO_DB_URL=mongodb://mongo:27017/poetry
       - ENV=DEVELOPMENT
-      - PROVIDER=http://localhost:8545
+      - PROVIDER=http://poetry-contracts:8545
+      - MNEMONIC=squirrel march broom strong kick blast unique team song song assist million
     volumes:
       - ./appdata:/appdata
     networks:
       - database
       - payments
-    links:
-      - mongo
-      - poetry-payments
+      - blockchain
   mongo:
     image: mongo
     ports:
@@ -73,5 +70,7 @@ networks:
   database:
     driver: bridge
   payments:
+    driver: bridge
+  blockchain:
     driver: bridge
   
