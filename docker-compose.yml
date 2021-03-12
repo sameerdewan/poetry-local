@@ -55,6 +55,7 @@ services:
       - PROVIDER=http://poetry-contracts:8545
       - MNEMONIC=squirrel march broom strong kick blast unique team song song assist million
       - GAS_LIMIT=4712388
+      - POETRY_PAYMENTS_URL:http://poetry-payments:5000
     volumes:
       - ./appdata:/appdata
     networks:
