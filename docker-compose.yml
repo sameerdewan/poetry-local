@@ -38,6 +38,7 @@ services:
       - ETHEREUM_USD_URL=https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=0
       - MONGO_DB_URL=mongodb://mongo:27017/poetry
       - ENV=DEVELOPMENT
+      - STRIPE_API_KEY=sk_test_51ITbKnDJuxMGVHCqOBv9g2HuCwRqfXiuB332SHglYEcAiRICHtJvZSD1in5rFbSviTgW417Z6xWGTICKucrzUHuE00OKaXv2Fd
     volumes:
       - ./appdata:/appdata
     networks:
@@ -56,6 +57,7 @@ services:
       - MNEMONIC=squirrel march broom strong kick blast unique team song song assist million
       - GAS_LIMIT=4712388
       - POETRY_PAYMENTS_URL:http://poetry-payments:5000
+      - STRIPE_API_KEY=sk_test_51ITbKnDJuxMGVHCqOBv9g2HuCwRqfXiuB332SHglYEcAiRICHtJvZSD1in5rFbSviTgW417Z6xWGTICKucrzUHuE00OKaXv2Fd
     volumes:
       - ./appdata:/appdata
     networks:
@@ -68,6 +70,12 @@ services:
     - "27017:27017"
     networks:
       - database
+  stripe:
+    image: stripe/stripe-cli
+    environment:
+      - STRIPE_API_KEY=sk_test_51ITbKnDJuxMGVHCqOBv9g2HuCwRqfXiuB332SHglYEcAiRICHtJvZSD1in5rFbSviTgW417Z6xWGTICKucrzUHuE00OKaXv2Fd
+    networks:
+      - payments
 networks:
   database:
     driver: bridge
