@@ -54,6 +54,7 @@ services:
       - ENV=DEVELOPMENT
       - PROVIDER=http://poetry-contracts:8545
       - MNEMONIC=squirrel march broom strong kick blast unique team song song assist million
+      - GAS_LIMIT=4712388
     volumes:
       - ./appdata:/appdata
     networks:
