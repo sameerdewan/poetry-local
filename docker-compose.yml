@@ -78,7 +78,7 @@ services:
       - poetry-payments
       - poetry-api
     environment:
-      - POETRY_SYSTEM_URL=http://poetry-system:8080
+      - REACT_APP_POETRY_SYSTEM_URL=http://localhost:8080
     networks:
       - ui
   mongo:
