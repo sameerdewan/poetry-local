@@ -13,6 +13,7 @@ services:
     - ./appdata:/appdata
     networks:
       - blockchain
+      - ui
   poetry-system:
     build: ../poetry-system
     ports:
@@ -27,6 +28,7 @@ services:
     - ./appdata:/appdata
     networks:
       - database
+      - ui
   poetry-payments:
     build: ../poetry-payments
     ports: 
@@ -45,6 +47,7 @@ services:
     networks:
       - database
       - payments
+      - ui
   poetry-api:
     build: ../poetry-api
     ports: 
@@ -65,6 +68,19 @@ services:
       - database
       - payments
       - blockchain
+      - ui
+  poetry-ui:
+    build: ../poetry-ui
+    ports:
+      - "3000:3000"
+    depends_on:
+      - poetry-system
+      - poetry-payments
+      - poetry-api
+    environment:
+      - POETRY_SYSTEM_URL=http://poetry-system:8080
+    networks:
+      - ui
   mongo:
     image: mongo
     ports:
@@ -77,5 +93,7 @@ networks:
   payments:
     driver: bridge
   blockchain:
+    driver: bridge
+  ui:
     driver: bridge
   
